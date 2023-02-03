@@ -1,3 +1,4 @@
+const { notEqual } = require('assert');
 const { randomUUID } = require('crypto');
 const { response } = require('express');
 const express = require('express');
@@ -5,7 +6,7 @@ const fs = require('fs');
 const path = require('path')
 const app = express()
 const PORT = process.env.PORT || 3001
-const db = require('./db/db.json')
+let db = require('./db/db.json')
 const uuid = require('./public/assets/js/uuid')
 
 
@@ -52,3 +53,21 @@ app.post(`/api/notes`, (req, res) => {
     res.json(db)
 })
 
+app.delete('/api/notes/:id',(req,res) => {
+    
+    const deletedNote = req.params.id;
+    console.log(deletedNote);
+
+    for( let i = 0; i < db.length; i++) {
+        if(db[i].id === req.params.id) {
+        // Grab all the notes that do not match the deleted note id
+        db = db.filter(note => note.id !== req.params.id )
+        // rewrites file to only include notes that do not match the id of the deleted note
+        fs.writeFile(`./db/db.json`, JSON.stringify(db), (err) => err ? console.error(err) : console.log(`New Note created`))
+        res.json(db)
+    }
+    }
+
+    
+}
+)
