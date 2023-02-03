@@ -11,7 +11,7 @@ const db = require('./db/db.json')
 // For parsing application/json
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(express.static(`public`))
 
 // Set up port to connect
 app.listen(PORT, () => {
@@ -26,11 +26,12 @@ res.sendFile(path.join(__dirname, 'public/index.html'));
 
 //   Notes Link
   app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/notes.html'));
+    res.sendFile(path.join(__dirname, 'public/notes.html'))
   });
 
-
+ 
 //   creating API from db.json
   app.get('/api/notes', (req, res) => {
     res.json(db)
   })
+
