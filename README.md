@@ -36,6 +36,6 @@ Deployed Link: https://lb-notetaker.herokuapp.com/notes
 
 ## Preview
 
-![App Screenshot]
+
 ![expresspreview](https://user-images.githubusercontent.com/112091298/228037369-8c7857d1-40be-4780-900e-1e29e30f7fb5.PNG)
 
